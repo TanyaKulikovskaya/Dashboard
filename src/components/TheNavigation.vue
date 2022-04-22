@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <div>
     <v-app-bar app elevation="0">
       <v-app-bar-nav-icon
         v-if="!$vuetify.breakpoint.lgAndUp"
@@ -33,13 +33,15 @@
               <v-icon>{{ icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>{{ text }}</v-list-item-title>
+              <v-list-item-title class="text-h6">
+                {{ text | formattedTitle }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-  </v-layout>
+  </div>
 </template>
 
 <script>
@@ -48,9 +50,9 @@ export default {
     drawer: false,
     group: null,
     items: [
-      { icon: 'mdi-view-dashboard', text: 'Dashboard', href: '/dashboard' },
-      { icon: 'mdi-poll', text: 'Analytics', href: '/analytics' },
-      { icon: 'mdi-cog', text: 'Setting', href: '/settings' },
+      { icon: 'mdi-view-dashboard', text: 'dashboard', href: '/dashboard' },
+      { icon: 'mdi-poll', text: 'analytics', href: '/analytics' },
+      { icon: 'mdi-cog', text: 'setting', href: '/settings' },
     ],
   }),
   watch: {
@@ -70,19 +72,39 @@ export default {
   padding: 0 !important;
 }
 
-.theme--light.v-list-item--active:before,
-.theme--light.v-list-item--active:hover:before,
-.theme--light.v-list-item:focus:before {
-  opacity: 0 !important;
+.v-list-item__content {
+  padding: 18px 0 !important;
 }
 
-.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled),
-.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled)
-  .v-icon {
-  color: #fff9e9 !important;
-}
-
-.v-list-item-group .v-list-item--active {
-  color: #efa500 !important;
+.v-navigation-drawer {
+  .v-navigation-drawer__content {
+    .v-list {
+      .v-list-item {
+        color: #fff9e9 !important;
+        .v-icon {
+          color: #fff9e9 !important;
+        }
+      }
+      .v-list-item--active {
+        color: #efa500 !important;
+        border-left: 4px solid #efa500;
+        &:before {
+          opacity: 0;
+        }
+        .v-icon {
+          color: #efa500 !important;
+        }
+      }
+      .v-list-item:hover {
+        color: #efa500 !important;
+        &:before {
+          opacity: 0;
+        }
+        .v-icon {
+          color: #efa500 !important;
+        }
+      }
+    }
+  }
 }
 </style>
