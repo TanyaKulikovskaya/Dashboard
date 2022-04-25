@@ -11,9 +11,9 @@ export default new Vuetify({
     },
     themes: {
       light: {
-        dark: '#161b40',
-        light: '#fff9e9',
-        orange: '#efa500',
+        dark: '#1d1d2c',
+        light: '#f7f4e9 ',
+        orange: '#eba63f',
       },
     },
   },

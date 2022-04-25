@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.theme--light.v-app-bar.v-toolbar.v-sheet {
+.v-app-bar.v-toolbar.v-sheet {
   background-color: #fff9e9 !important;
 }
 
@@ -80,28 +80,28 @@ export default {
   .v-navigation-drawer__content {
     .v-list {
       .v-list-item {
-        color: #fff9e9 !important;
+        color: #f7f4e9 !important;
         .v-icon {
-          color: #fff9e9 !important;
+          color: #f7f4e9 !important;
         }
       }
       .v-list-item--active {
-        color: #efa500 !important;
-        border-left: 4px solid #efa500;
+        color: #eba63f !important;
+        border-left: 4px solid #eba63f;
         &:before {
           opacity: 0;
         }
         .v-icon {
-          color: #efa500 !important;
+          color: #eba63f !important;
         }
       }
       .v-list-item:hover {
-        color: #efa500 !important;
+        color: #ffb48d !important;
         &:before {
           opacity: 0;
         }
         .v-icon {
-          color: #efa500 !important;
+          color: #ffb48d !important;
         }
       }
     }
