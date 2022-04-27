@@ -96,12 +96,8 @@ export default {
         }
       }
       .v-list-item:hover {
-        color: #ffb48d !important;
         &:before {
-          opacity: 0;
-        }
-        .v-icon {
-          color: #ffb48d !important;
+          opacity: 0.08;
         }
       }
     }

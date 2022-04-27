@@ -1,10 +1,18 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="9">
+      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="9">
         <v-row>
-          <v-col cols="6">
-            <v-card elevation="0" class="py-4 px-3" min-height="180">
+          <v-col
+            cols="12"
+            xs="12"
+            sm="12"
+            md="6"
+            lg="6"
+            xl="6"
+            class="d-flex align-stretch"
+          >
+            <v-card elevation="0" class="py-4 px-3" width="100%" rounded>
               <v-card-title class="px-0 pt-0 pb-2">
                 Choose call type
               </v-card-title>
@@ -22,8 +30,16 @@
               </v-chip-group>
             </v-card>
           </v-col>
-          <v-col cols="6">
-            <v-card elevation="0" class="py-4 px-3" min-height="180">
+          <v-col
+            cols="12"
+            xs="12"
+            sm="12"
+            md="6"
+            lg="6"
+            xl="6"
+            class="d-flex align-stretch"
+          >
+            <v-card elevation="0" class="py-4 px-3" width="100%" rounded>
               <v-card-title class="px-0 pt-0 pb-2">
                 Choose call status
               </v-card-title>
@@ -44,17 +60,66 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="9">
+        <v-card elevation="0" class="py-4 px-3" width="100%" rounded>
+          <v-card-title class="px-0 pt-0 pb-2"
+            >Call list
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              clearable
+              hide-details
+            >
+            </v-text-field>
+          </v-card-title>
+          <v-data-table
+            :headers="headers"
+            :items="calls"
+            :search="search"
+            :items-per-page="5"
+            multi-sort
+          >
+            <template v-slot:[`item.type`]="{ item }">
+              <v-icon :color="getColorByType(item.type)">mdi-phone</v-icon>
+              {{ item.type | formattedTitle }}
+            </template>
+            <template v-slot:[`item.status`]="{ item }">
+              <v-icon :color="getColorByStatus(item.status)">mdi-phone</v-icon>
+              {{ item.status | formattedTitle }}
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import { headers, calls } from '@/data/mock-table'
+
 export default {
   data: () => ({
+    search: '',
+    headers,
+    calls,
     selectedTypes: [],
     selectedStatuses: [],
     typesStatuses: {
       incoming: ['answered', 'unanswered'],
       outcoming: ['answered', 'unanswered', 'diverted'],
+    },
+    typeColors: {
+      incoming: 'blue',
+      outcoming: 'green',
+    },
+    statusColors: {
+      answered: 'green',
+      unanswered: 'red',
+      diverted: 'orange',
     },
   }),
   computed: {
@@ -67,6 +132,14 @@ export default {
       } else {
         return this.typesStatuses.incoming
       }
+    },
+  },
+  methods: {
+    getColorByType(type) {
+      return this.typeColors[type]
+    },
+    getColorByStatus(status) {
+      return this.statusColors[status]
     },
   },
 }
