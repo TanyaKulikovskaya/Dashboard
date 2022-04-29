@@ -16,6 +16,7 @@ export default new Vuetify({
         orange: '#eba63f',
         green: '#438945',
         blue: '#3cbcc3',
+        primary: '#3cbcc3',
         red: '#e40c2b',
       },
     },
