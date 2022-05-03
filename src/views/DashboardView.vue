@@ -63,14 +63,19 @@
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="9">
         <v-card elevation="0" class="py-4 px-3" width="100%" rounded>
-          <v-card-title class="px-0 pt-0 pb-2">
+          <v-card-title class="d-flex align-end px-2 pt-0 pb-6">
             Call list
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
               append-icon="mdi-magnify"
               label="Search sourse or destination"
+              background-color="input"
+              color="label"
+              dense
               clearable
+              filled
+              rounded
               hide-details
             >
             </v-text-field>
@@ -82,6 +87,7 @@
             disable-pagination
             hide-default-footer
             fixed-header
+            height="416px"
           >
             <template v-slot:[`item.type`]="{ item }">
               <v-avatar
@@ -127,13 +133,13 @@ export default {
       outcoming: ['answered', 'unanswered', 'diverted'],
     },
     typeColors: {
-      incoming: 'blue',
-      outcoming: 'green',
+      incoming: 'primary',
+      outcoming: 'info',
     },
     statusColors: {
-      answered: 'green',
-      unanswered: 'red',
-      diverted: 'orange',
+      answered: 'info',
+      unanswered: 'error',
+      diverted: 'warning',
     },
   }),
   computed: {
@@ -179,41 +185,41 @@ export default {
   text-transform: uppercase;
   font-weight: 500;
   &.incoming {
-    color: #3cbcc3;
-    border-color: #3cbcc3;
+    color: $primary;
+    border-color: $primary;
   }
   &.outcoming,
   &.answered {
-    color: #438945;
-    border-color: #438945;
+    color: $info;
+    border-color: $info;
   }
   &.unanswered {
-    color: #e40c2b;
-    border-color: #e40c2b;
+    color: $error;
+    border-color: $error;
   }
   &.diverted {
-    color: #eba63f;
-    border-color: #eba63f;
+    color: $warning;
+    border-color: $warning;
   }
 }
 
 .v-chip--active {
-  color: #f7f4e9 !important;
+  color: $light !important;
   &.incoming {
-    background: #3cbcc3 !important;
+    background: $primary !important;
   }
   &.outcoming,
   &.answered {
-    background: #438945 !important;
+    background: $info !important;
   }
   &.unanswered {
-    background: #e40c2b !important;
+    background: $error !important;
   }
   &.diverted {
-    background: #eba63f !important;
+    background: $warning !important;
   }
   .v-icon {
-    color: #f7f4e9 !important;
+    color: $light !important;
   }
 }
 

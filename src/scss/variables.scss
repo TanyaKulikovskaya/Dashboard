@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
+$dark: #1d1d2c;
+$light: #f7f4e9;
+$warning: #eba63f;
+$info: #3bb273;
+$primary: #3cbcc3;
+$secondary: #a5a6e5;
+$error: #e40c2b;
+
 $body-font-family: 'Montserrat', sans-serif;
 $heading-font-family: 'Montserrat', sans-serif;
 
@@ -10,3 +18,6 @@ $icon-sizes: (
       'height': 38
     ),
 );
+
+$data-table-regular-header-height: 52px !important;
+$data-table-regular-row-height: 52px !important;
