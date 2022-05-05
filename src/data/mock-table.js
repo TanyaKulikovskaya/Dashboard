@@ -1,6 +1,6 @@
 const headers = [
   {
-    text: 'Call type',
+    text: 'Type',
     align: 'left',
     sortable: false,
     filterable: false,
