@@ -3,36 +3,42 @@
     <v-row>
       <v-col cols="12" sm="12" md="12" lg="3" xl="3">
         <v-card elevation="0" class="py-4 px-3" rounded>
-          <v-card-title class="px-0 pt-0 pb-2"> Choose call type </v-card-title>
-          <v-chip-group v-model="filters.type" multiple column>
-            <v-chip
-              v-for="type in types"
-              :key="type"
-              :value="type"
-              filter
-              large
-              label
-              :class="`${type}`"
-            >
-              {{ type }}
-            </v-chip>
-          </v-chip-group>
-          <v-card-title class="px-0 pt-0 pb-2">
-            Choose call status
-          </v-card-title>
-          <v-chip-group v-model="filters.status" multiple column>
-            <v-chip
-              v-for="status in statuses"
-              :key="status"
-              :value="status"
-              filter
-              large
-              label
-              :class="`${status}`"
-            >
-              {{ status }}
-            </v-chip>
-          </v-chip-group>
+          <v-row>
+            <v-col cols="12" sm="6" md="6" lg="12" xl="12">
+              <v-card-title class="px-0 pt-0 pb-2">
+                Choose call type
+              </v-card-title>
+              <v-chip-group v-model="filters.type" multiple column>
+                <v-chip
+                  v-for="type in types"
+                  :key="type"
+                  :value="type"
+                  filter
+                  label
+                  :class="`${type}`"
+                >
+                  {{ type }}
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+            <v-col cols="12" sm="6" md="6" lg="12" xl="12">
+              <v-card-title class="px-0 pt-0 pb-2">
+                Choose call status
+              </v-card-title>
+              <v-chip-group v-model="filters.status" multiple column>
+                <v-chip
+                  v-for="status in statuses"
+                  :key="status"
+                  :value="status"
+                  filter
+                  label
+                  :class="`${status}`"
+                >
+                  {{ status }}
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
 
@@ -45,8 +51,8 @@
               v-model="search"
               append-icon="mdi-magnify"
               label="Search sourse or destination"
-              background-color="input"
-              color="label"
+              background-color="purplelight"
+              color="purpledark"
               dense
               clearable
               filled

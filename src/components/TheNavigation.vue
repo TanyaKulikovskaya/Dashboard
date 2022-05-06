@@ -1,15 +1,15 @@
 <template>
   <div>
-    <v-toolbar fixed color="dark" elevation="0" height="72">
+    <v-toolbar fixed color="light" elevation="0" height="78">
       <v-toolbar-title>Your Logo</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-list class="hidden-sm-and-down" color="dark">
+      <v-list class="hidden-sm-and-down" color="light">
         <v-list-item-group class="d-flex">
           <v-list-item
             v-for="({ icon, text, href }, i) in items"
             :key="i"
             :to="href"
-            class="px-6"
+            class="px-1 mx-5"
           >
             <v-list-item-icon class="mr-1">
               <v-icon small>{{ icon }}</v-icon>
@@ -24,7 +24,7 @@
       </v-list>
       <v-app-bar-nav-icon
         class="hidden-md-and-up"
-        color="light"
+        color="dark"
         @click.stop="drawer = !drawer"
       >
       </v-app-bar-nav-icon>
@@ -74,46 +74,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-list {
-  padding: 0 !important;
-}
-
-.v-toolbar__title {
-  color: $light !important;
-}
-
-.v-list {
-  .v-list-item {
-    color: $light !important;
-    .v-icon {
-      color: $light !important;
-    }
+.v-toolbar {
+  &__title {
+    color: $dark !important;
   }
-  .v-list-item--active {
-    color: $warning !important;
-    &:before {
-      opacity: 0;
-    }
-    .v-icon {
-      color: $warning !important;
-    }
-  }
-  .v-list-item:hover {
-    &:before {
-      opacity: 0;
+  &__content {
+    .v-list {
+      .v-list-item {
+        color: $dark !important;
+        .v-icon {
+          color: $dark !important;
+        }
+      }
+      .v-list-item--active {
+        border-bottom: 2px solid $warning;
+        color: $warning !important;
+        &:before {
+          opacity: 0;
+        }
+        .v-icon {
+          color: $warning !important;
+        }
+      }
+      .v-list-item:hover {
+        &:before {
+          opacity: 0;
+        }
+      }
     }
   }
 }
 
 .v-navigation-drawer {
-  .v-navigation-drawer__content {
+  &__content {
     .v-list-item {
-      padding: 8px 16px;
+      color: $light !important;
+      .v-icon {
+        color: $light !important;
+      }
     }
     .v-list-item--active {
       border-right: 4px solid $warning;
+      color: $warning !important;
       &:before {
         opacity: 0;
+      }
+      .v-icon {
+        color: $warning !important;
       }
     }
     .v-list-item:hover {
