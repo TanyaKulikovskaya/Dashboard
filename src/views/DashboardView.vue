@@ -70,6 +70,21 @@
             fixed-header
             height="416px"
           >
+            <template v-slot:[`item.date`]="{ item }">
+              <span>
+                {{
+                  new Intl.DateTimeFormat('ru-RU', {
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: false,
+                    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                  }).format(new Date(item.date * 1000))
+                }}
+              </span>
+            </template>
             <template v-slot:[`item.type`]="{ item }">
               <v-avatar
                 :color="getColorByType(item.type)"
@@ -146,8 +161,11 @@ export default {
         return this.typesStatuses.incoming
       }
     },
+    sortedByTimestampCalls() {
+      return [...this.calls].sort((a, b) => b.date - a.date)
+    },
     filteredCalls() {
-      return this.calls.filter((call) => {
+      return this.sortedByTimestampCalls.filter((call) => {
         return Object.keys(this.filters).every((filter) => {
           return (
             this.filters[filter].length < 1 ||

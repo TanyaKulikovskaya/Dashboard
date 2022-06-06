@@ -1,5 +1,13 @@
 const headers = [
   {
+    text: 'Date',
+    align: 'center',
+    sortable: false,
+    filterable: false,
+    value: 'date',
+    class: 'light--text text-button secondary',
+  },
+  {
     text: 'Type',
     align: 'left',
     sortable: false,
@@ -41,6 +49,7 @@ const headers = [
 
 const calls = [
   {
+    date: 1652246933,
     type: 'incoming',
     status: 'unanswered',
     sourse: 159,
@@ -48,6 +57,7 @@ const calls = [
     duration: '0:00:10',
   },
   {
+    date: 1652300133,
     type: 'outcoming',
     status: 'unanswered',
     sourse: 800810100,
@@ -55,6 +65,7 @@ const calls = [
     duration: '0:00:00',
   },
   {
+    date: 1649880933,
     type: 'incoming',
     status: 'answered',
     sourse: 400,
@@ -62,6 +73,7 @@ const calls = [
     duration: '0:08:40',
   },
   {
+    date: 1649834133,
     type: 'outcoming',
     status: 'answered',
     sourse: 119,
@@ -69,6 +81,7 @@ const calls = [
     duration: '1:04:30',
   },
   {
+    date: 1648710957,
     type: 'outcoming',
     status: 'diverted',
     sourse: 600233,
@@ -76,6 +89,7 @@ const calls = [
     duration: '0:04:00',
   },
   {
+    date: 1648376157,
     type: 'incoming',
     status: 'unanswered',
     sourse: 390100100,
@@ -83,6 +97,7 @@ const calls = [
     duration: '0:10:00',
   },
   {
+    date: 1647339359,
     type: 'outcoming',
     status: 'diverted',
     sourse: 600,
@@ -90,6 +105,7 @@ const calls = [
     duration: '0:14:14',
   },
   {
+    date: 1652700143,
     type: 'incoming',
     status: 'unanswered',
     sourse: 159,
@@ -97,6 +113,7 @@ const calls = [
     duration: '0:00:10',
   },
   {
+    date: 1647342119,
     type: 'outcoming',
     status: 'unanswered',
     sourse: 800810100,
@@ -104,13 +121,7 @@ const calls = [
     duration: '0:00:00',
   },
   {
-    type: 'incoming',
-    status: 'answered',
-    sourse: 400700,
-    destination: 122000111,
-    duration: '0:08:40',
-  },
-  {
+    date: 1650106919,
     type: 'outcoming',
     status: 'answered',
     sourse: 1911110,
@@ -118,6 +129,7 @@ const calls = [
     duration: '1:04:30',
   },
   {
+    date: 1649070119,
     type: 'outcoming',
     status: 'answered',
     sourse: 600233,
@@ -125,6 +137,7 @@ const calls = [
     duration: '0:12:00',
   },
   {
+    date: 1648984596,
     type: 'incoming',
     status: 'answered',
     sourse: 100100,
@@ -132,6 +145,7 @@ const calls = [
     duration: '0:11:00',
   },
   {
+    date: 1649243773,
     type: 'incoming',
     status: 'diverted',
     sourse: 600,
@@ -139,6 +153,7 @@ const calls = [
     duration: '0:00:14',
   },
   {
+    date: 1649859373,
     type: 'incoming',
     status: 'unanswered',
     sourse: 159,
@@ -146,6 +161,7 @@ const calls = [
     duration: '0:00:10',
   },
   {
+    date: 1649860393,
     type: 'outcoming',
     status: 'unanswered',
     sourse: 800810100,
@@ -153,6 +169,7 @@ const calls = [
     duration: '0:00:00',
   },
   {
+    date: 1650951197,
     type: 'incoming',
     status: 'answered',
     sourse: 400,
@@ -160,6 +177,7 @@ const calls = [
     duration: '0:08:40',
   },
   {
+    date: 1651026797,
     type: 'outcoming',
     status: 'answered',
     sourse: 119,
@@ -167,6 +185,7 @@ const calls = [
     duration: '1:04:30',
   },
   {
+    date: 1651026879,
     type: 'outcoming',
     status: 'diverted',
     sourse: 600233,
@@ -174,6 +193,7 @@ const calls = [
     duration: '0:04:00',
   },
   {
+    date: 1651135030,
     type: 'outcoming',
     status: 'unanswered',
     sourse: 800810100,
@@ -181,46 +201,12 @@ const calls = [
     duration: '0:00:00',
   },
   {
+    date: 1651221420,
     type: 'incoming',
     status: 'answered',
     sourse: 400700,
     destination: 122000111,
     duration: '0:08:40',
-  },
-  {
-    type: 'outcoming',
-    status: 'answered',
-    sourse: 1911110,
-    destination: 80080010090,
-    duration: '1:04:30',
-  },
-  {
-    type: 'outcoming',
-    status: 'answered',
-    sourse: 600233,
-    destination: 10030040011,
-    duration: '0:12:00',
-  },
-  {
-    type: 'incoming',
-    status: 'answered',
-    sourse: 100100,
-    destination: 50043044011,
-    duration: '0:11:00',
-  },
-  {
-    type: 'incoming',
-    status: 'diverted',
-    sourse: 600,
-    destination: 120100111,
-    duration: '0:00:14',
-  },
-  {
-    type: 'incoming',
-    status: 'unanswered',
-    sourse: 159,
-    destination: 144800100,
-    duration: '0:00:10',
   },
 ]
 
