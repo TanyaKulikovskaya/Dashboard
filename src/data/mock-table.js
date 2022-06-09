@@ -49,7 +49,7 @@ const headers = [
 
 const calls = [
   {
-    date: 1652246933,
+    date: 1652246933000,
     type: 'incoming',
     status: 'unanswered',
     sourse: 159,
@@ -57,7 +57,7 @@ const calls = [
     duration: '0:00:10',
   },
   {
-    date: 1652300133,
+    date: 1652300133000,
     type: 'outcoming',
     status: 'unanswered',
     sourse: 800810100,
@@ -65,7 +65,7 @@ const calls = [
     duration: '0:00:00',
   },
   {
-    date: 1649880933,
+    date: 1649880933000,
     type: 'incoming',
     status: 'answered',
     sourse: 400,
@@ -73,7 +73,7 @@ const calls = [
     duration: '0:08:40',
   },
   {
-    date: 1649834133,
+    date: 1649834133000,
     type: 'outcoming',
     status: 'answered',
     sourse: 119,
@@ -81,7 +81,7 @@ const calls = [
     duration: '1:04:30',
   },
   {
-    date: 1648710957,
+    date: 1648710957000,
     type: 'outcoming',
     status: 'diverted',
     sourse: 600233,
@@ -89,7 +89,7 @@ const calls = [
     duration: '0:04:00',
   },
   {
-    date: 1648376157,
+    date: 1648376157000,
     type: 'incoming',
     status: 'unanswered',
     sourse: 390100100,
@@ -97,7 +97,7 @@ const calls = [
     duration: '0:10:00',
   },
   {
-    date: 1647339359,
+    date: 1647339359000,
     type: 'outcoming',
     status: 'diverted',
     sourse: 600,
@@ -105,7 +105,7 @@ const calls = [
     duration: '0:14:14',
   },
   {
-    date: 1652700143,
+    date: 1652700143000,
     type: 'incoming',
     status: 'unanswered',
     sourse: 159,
@@ -113,7 +113,7 @@ const calls = [
     duration: '0:00:10',
   },
   {
-    date: 1647342119,
+    date: 1647342119000,
     type: 'outcoming',
     status: 'unanswered',
     sourse: 800810100,
@@ -121,7 +121,7 @@ const calls = [
     duration: '0:00:00',
   },
   {
-    date: 1650106919,
+    date: 1650106919000,
     type: 'outcoming',
     status: 'answered',
     sourse: 1911110,
@@ -129,7 +129,7 @@ const calls = [
     duration: '1:04:30',
   },
   {
-    date: 1649070119,
+    date: 1649070119090,
     type: 'outcoming',
     status: 'answered',
     sourse: 600233,
@@ -137,7 +137,7 @@ const calls = [
     duration: '0:12:00',
   },
   {
-    date: 1648984596,
+    date: 1648984596000,
     type: 'incoming',
     status: 'answered',
     sourse: 100100,
@@ -145,7 +145,7 @@ const calls = [
     duration: '0:11:00',
   },
   {
-    date: 1649243773,
+    date: 1649243773000,
     type: 'incoming',
     status: 'diverted',
     sourse: 600,
@@ -153,7 +153,7 @@ const calls = [
     duration: '0:00:14',
   },
   {
-    date: 1649859373,
+    date: 1649859373000,
     type: 'incoming',
     status: 'unanswered',
     sourse: 159,
@@ -161,7 +161,7 @@ const calls = [
     duration: '0:00:10',
   },
   {
-    date: 1649860393,
+    date: 1649860393000,
     type: 'outcoming',
     status: 'unanswered',
     sourse: 800810100,
@@ -169,7 +169,7 @@ const calls = [
     duration: '0:00:00',
   },
   {
-    date: 1650951197,
+    date: 1650951197000,
     type: 'incoming',
     status: 'answered',
     sourse: 400,
@@ -177,7 +177,7 @@ const calls = [
     duration: '0:08:40',
   },
   {
-    date: 1651026797,
+    date: 1651026797000,
     type: 'outcoming',
     status: 'answered',
     sourse: 119,
@@ -185,7 +185,7 @@ const calls = [
     duration: '1:04:30',
   },
   {
-    date: 1651026879,
+    date: 1651026879000,
     type: 'outcoming',
     status: 'diverted',
     sourse: 600233,
@@ -193,7 +193,7 @@ const calls = [
     duration: '0:04:00',
   },
   {
-    date: 1651135030,
+    date: 1651135030000,
     type: 'outcoming',
     status: 'unanswered',
     sourse: 800810100,
@@ -201,7 +201,7 @@ const calls = [
     duration: '0:00:00',
   },
   {
-    date: 1651221420,
+    date: 1651221420300,
     type: 'incoming',
     status: 'answered',
     sourse: 400700,

@@ -38,6 +38,18 @@
                 </v-chip>
               </v-chip-group>
             </v-col>
+            <v-col cols="12" sm="6" md="6" lg="12" xl="12">
+              <date-range-picker
+                ref="picker"
+                v-model="datePickerSettings.dateRange"
+                :ranges="datePickerSettings.ranges"
+                :locale-data="datePickerSettings.locale"
+                :timePicker="datePickerSettings.timePicker"
+                :time-picker-increment="datePickerSettings.timePickerIncrement"
+                :opens="datePickerSettings.opens"
+              >
+              </date-range-picker>
+            </v-col>
           </v-row>
         </v-card>
       </v-col>
@@ -63,7 +75,7 @@
           </v-card-title>
           <v-data-table
             :headers="headers"
-            :items="filteredCalls"
+            :items="resultCalls"
             :search="search"
             disable-pagination
             hide-default-footer
@@ -81,7 +93,7 @@
                     minute: 'numeric',
                     hour12: false,
                     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                  }).format(new Date(item.date * 1000))
+                  }).format(new Date(item.date))
                 }}
               </span>
             </template>
@@ -127,29 +139,71 @@
 <script>
 import { headers, calls } from '@/data/mock-table'
 
+import DateRangePicker from 'vue2-daterange-picker'
+import 'vue2-daterange-picker/dist/vue2-daterange-picker.css'
+
 export default {
-  data: () => ({
-    search: '',
-    headers,
-    calls,
-    filters: {
-      type: [],
-      status: [],
-    },
-    typesStatuses: {
-      incoming: ['answered', 'unanswered'],
-      outcoming: ['answered', 'unanswered', 'diverted'],
-    },
-    typeColors: {
-      incoming: 'primary',
-      outcoming: 'info',
-    },
-    statusColors: {
-      answered: 'info',
-      unanswered: 'error',
-      diverted: 'warning',
-    },
-  }),
+  components: {
+    DateRangePicker,
+  },
+  data() {
+    return {
+      search: '',
+      headers,
+      calls,
+      filters: {
+        type: [],
+        status: [],
+      },
+      typesStatuses: {
+        incoming: ['answered', 'unanswered'],
+        outcoming: ['answered', 'unanswered', 'diverted'],
+      },
+      typeColors: {
+        incoming: 'primary',
+        outcoming: 'info',
+      },
+      statusColors: {
+        answered: 'info',
+        unanswered: 'error',
+        diverted: 'warning',
+      },
+      datePickerSettings: {
+        dateRange: {
+          startDate: '',
+          endDate: '',
+        },
+        ranges: {},
+        locale: {
+          format: 'dd.mm.yyyy',
+          separator: ' - ',
+          applyLabel: 'Найти',
+          cancelLabel: 'Отмена',
+          weekLabel: 'W',
+          customRangeLabel: 'Custom Range',
+          daysOfWeek: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+          monthNames: [
+            'Январь',
+            'Февраль',
+            'Март',
+            'Апрель',
+            'Май',
+            'Июнь',
+            'Июль',
+            'Август',
+            'Сентябрь',
+            'Октябрь',
+            'Ноябрь',
+            'Декабрь',
+          ],
+          firstDay: 1,
+        },
+        opens: 'right',
+        timePicker: true,
+        timePickerIncrement: 30,
+      },
+    }
+  },
   computed: {
     types() {
       return Object.keys(this.typesStatuses)
@@ -174,6 +228,18 @@ export default {
         })
       })
     },
+    resultCalls() {
+      const start = new Date(
+        this.datePickerSettings.dateRange.startDate
+      ).getTime()
+      const end = new Date(this.datePickerSettings.dateRange.endDate).getTime()
+      return this.filteredCalls.filter(
+        (call) => call.date >= start && call.date <= end
+      )
+    },
+  },
+  mounted() {
+    this.createRanges()
   },
   methods: {
     getColorByType(type) {
@@ -181,6 +247,38 @@ export default {
     },
     getColorByStatus(status) {
       return this.statusColors[status]
+    },
+    createRanges() {
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+
+      // eslint-disable-next-line prefer-const
+      let yesterday = new Date()
+      yesterday.setDate(today.getDate() - 1)
+      yesterday.setHours(0, 0, 0, 0)
+
+      // eslint-disable-next-line prefer-const
+      let days6 = new Date()
+      days6.setDate(today.getDate() - 6)
+      days6.setHours(0, 0, 0, 0)
+
+      // eslint-disable-next-line prefer-const
+      let ranges = {
+        'Сегодня ': [today, today],
+        'Вчера ': [yesterday, yesterday],
+        'Последние 7 дней': [days6, today],
+        'Текущий месяц': [
+          new Date(today.getFullYear(), today.getMonth(), 1),
+          today,
+        ],
+        'Прошлый месяц': [
+          new Date(today.getFullYear(), today.getMonth() - 1, 1),
+          new Date(today.getFullYear(), today.getMonth(), 0),
+        ],
+      }
+      this.datePickerSettings.dateRange.startDate = new Date(1647339359000)
+      this.datePickerSettings.dateRange.endDate = today
+      this.datePickerSettings.ranges = ranges
     },
   },
 }
