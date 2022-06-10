@@ -23,7 +23,7 @@
             </v-col>
             <v-col cols="12" sm="6" md="6" lg="12" xl="12">
               <v-card-title class="px-0 pt-0 pb-2">
-                Choose call status
+                Choose call type
               </v-card-title>
               <v-chip-group v-model="filters.status" multiple column>
                 <v-chip
@@ -39,15 +39,24 @@
               </v-chip-group>
             </v-col>
             <v-col cols="12" sm="6" md="6" lg="12" xl="12">
+              <v-card-title class="px-0 pt-0 pb-4">
+                Choose date range
+              </v-card-title>
               <date-range-picker
                 ref="picker"
                 v-model="datePickerSettings.dateRange"
+                :max-date="datePickerSettings.maxDate"
+                :min-date="datePickerSettings.minDate"
                 :ranges="datePickerSettings.ranges"
                 :locale-data="datePickerSettings.locale"
                 :timePicker="datePickerSettings.timePicker"
                 :time-picker-increment="datePickerSettings.timePickerIncrement"
                 :opens="datePickerSettings.opens"
               >
+                <template v-slot:input="picker">
+                  <v-icon color="dark" class="mr-2">mdi-calendar</v-icon>
+                  {{ picker.startDate | date }} - {{ picker.endDate | date }}
+                </template>
               </date-range-picker>
             </v-col>
           </v-row>
@@ -173,36 +182,44 @@ export default {
           startDate: '',
           endDate: '',
         },
+        minDate: '',
+        maxDate: '',
         ranges: {},
         locale: {
           format: 'dd.mm.yyyy',
           separator: ' - ',
-          applyLabel: 'Найти',
-          cancelLabel: 'Отмена',
+          applyLabel: 'Apply',
+          cancelLabel: 'Cancel',
           weekLabel: 'W',
           customRangeLabel: 'Custom Range',
-          daysOfWeek: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+          daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
           monthNames: [
-            'Январь',
-            'Февраль',
-            'Март',
-            'Апрель',
-            'Май',
-            'Июнь',
-            'Июль',
-            'Август',
-            'Сентябрь',
-            'Октябрь',
-            'Ноябрь',
-            'Декабрь',
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
           ],
           firstDay: 1,
         },
         opens: 'right',
         timePicker: true,
-        timePickerIncrement: 30,
+        timePickerIncrement: 15,
       },
     }
+  },
+  filters: {
+    date(value) {
+      const options = { year: 'numeric', month: 'numeric', day: 'numeric' }
+      return value ? value.toLocaleString('ru-RU', options) : ''
+    },
   },
   computed: {
     types() {
@@ -249,36 +266,58 @@ export default {
       return this.statusColors[status]
     },
     createRanges() {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
+      const todayStart = new Date()
+      todayStart.setHours(0, 0, 0, 0)
+      const todayEnd = new Date()
+      todayEnd.setHours(23, 59, 59, 0)
 
-      // eslint-disable-next-line prefer-const
-      let yesterday = new Date()
-      yesterday.setDate(today.getDate() - 1)
-      yesterday.setHours(0, 0, 0, 0)
+      const yesterdayStart = new Date()
+      yesterdayStart.setDate(todayStart.getDate() - 1)
+      yesterdayStart.setHours(0, 0, 0, 0)
+      const yesterdayEnd = new Date()
+      yesterdayEnd.setDate(todayEnd.getDate() - 1)
+      yesterdayEnd.setHours(23, 59, 59, 0)
 
-      // eslint-disable-next-line prefer-const
-      let days6 = new Date()
-      days6.setDate(today.getDate() - 6)
+      const days6 = new Date()
+      days6.setDate(todayStart.getDate() - 6)
       days6.setHours(0, 0, 0, 0)
 
-      // eslint-disable-next-line prefer-const
-      let ranges = {
-        'Сегодня ': [today, today],
-        'Вчера ': [yesterday, yesterday],
-        'Последние 7 дней': [days6, today],
-        'Текущий месяц': [
-          new Date(today.getFullYear(), today.getMonth(), 1),
-          today,
-        ],
-        'Прошлый месяц': [
-          new Date(today.getFullYear(), today.getMonth() - 1, 1),
-          new Date(today.getFullYear(), today.getMonth(), 0),
-        ],
+      const thisMonthStart = new Date(
+        todayStart.getFullYear(),
+        todayStart.getMonth(),
+        1
+      )
+
+      const lastMonthStart = new Date(
+        todayStart.getFullYear(),
+        todayStart.getMonth() - 1,
+        1
+      )
+      const lastMonthEnd = new Date(
+        todayStart.getFullYear(),
+        todayStart.getMonth(),
+        0
+      )
+      lastMonthEnd.setHours(23, 59, 59, 0)
+
+      const ranges = {
+        'Today ': [todayStart, todayEnd],
+        'Yesterday ': [yesterdayStart, yesterdayEnd],
+        'Last 7 days': [days6, todayEnd],
+        'This month': [thisMonthStart, todayEnd],
+        'Last month': [lastMonthStart, lastMonthEnd],
       }
-      this.datePickerSettings.dateRange.startDate = new Date(1647339359000)
-      this.datePickerSettings.dateRange.endDate = today
+
       this.datePickerSettings.ranges = ranges
+
+      const startDate = new Date(1647339359000)
+      startDate.setDate(startDate.getDate())
+      startDate.setHours(0, 0, 0, 0)
+
+      this.datePickerSettings.dateRange.startDate = startDate
+      this.datePickerSettings.dateRange.endDate = todayEnd
+      this.datePickerSettings.minDate = startDate
+      this.datePickerSettings.maxDate = todayEnd
     },
   },
 }
@@ -348,5 +387,154 @@ export default {
 }
 .text-diverted {
   color: $warning;
+}
+</style>
+
+<style lang="scss">
+.reportrange-text {
+  display: flex;
+  align-items: center;
+  padding: 6px 18px !important;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  border-color: $dark !important;
+  border-radius: 4px;
+  color: $dark;
+  &:hover {
+    background-color: $purplelight;
+  }
+}
+
+.daterangepicker {
+  padding: 8px 12px;
+  background-color: $purplelight;
+  border: none;
+  &::before,
+  &::after {
+    display: none;
+  }
+}
+
+.daterangepicker.show-ranges {
+  min-width: 0 !important;
+}
+
+.daterangepicker .ranges ul {
+  width: 100%;
+}
+
+.daterangepicker .ranges li {
+  color: $dark;
+  font-size: 14px;
+  line-height: 18px;
+  border-radius: 4px;
+  &:hover {
+    background-color: transparent;
+    color: $secondary;
+  }
+}
+
+.daterangepicker .ranges li.active {
+  background-color: $secondary;
+  color: white;
+}
+
+.daterangepicker.show-ranges .drp-calendar.left,
+.daterangepicker .drp-buttons {
+  border: none;
+}
+
+.daterangepicker .drp-calendar {
+  padding: 12px !important;
+}
+
+.daterangepicker .calendars,
+.daterangepicker .calendars-container {
+  flex-direction: column;
+}
+
+.daterangepicker .calendar-table th {
+  font-weight: normal !important;
+}
+
+.daterangepicker .calendar-table th.month {
+  font-size: 16px;
+}
+
+.daterangepicker td.in-range {
+  background-color: $light;
+}
+
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+  background-color: $dark;
+}
+
+.daterangepicker .calendar-time {
+  margin-top: 8px;
+}
+
+.daterangepicker select.ampmselect,
+.daterangepicker select.hourselect,
+.daterangepicker select.minuteselect,
+.daterangepicker select.secondselect {
+  background: $purplelight;
+  border: 1px solid $purpledark;
+  border-radius: 4px;
+  color: $purpledark;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.daterangepicker.show-calendar .drp-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.daterangepicker .drp-buttons {
+  padding: 16px;
+  border-top: 1px solid $purpledark;
+}
+
+.daterangepicker.show-calendar .drp-buttons > *:not(:last-child),
+.daterangepicker.show-calendar .drp-calendar > *:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.daterangepicker .drp-selected {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: $purpledark;
+  padding-right: 0px;
+}
+
+.daterangepicker .drp-buttons .btn {
+  margin-left: 0px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.daterangepicker .btn-secondary {
+  background-color: white;
+  color: $purpledark;
+  border: 1px solid $purpledark;
+  &:hover {
+    background-color: $purplelight;
+  }
+}
+
+.daterangepicker .btn-success {
+  background-color: $secondary;
+  color: $purplelight;
+  &:hover {
+    background-color: $dark;
+  }
 }
 </style>
